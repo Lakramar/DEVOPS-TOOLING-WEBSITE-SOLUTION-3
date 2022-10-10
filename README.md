@@ -97,7 +97,7 @@ Important note: In order for NFS server to be accessible from your client, you m
 3. Create a database user and name it webaccess
 4. Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
 
-Step 3 — Prepare the Web Servers
+## Step 3 — Prepare the Web Servers
 We need to make sure that our Web Servers can serve the same content from shared storage solutions, in our case – NFS Server and MySQL database.
 You already know that one DB can be accessed for reads and writes by multiple clients. For storing shared files that our Web Servers will use – we 
 will utilize NFS and mount previously created Logical Volume lv-apps to the folder where Apache stores files to be served to the users (/var/www).
@@ -119,7 +119,6 @@ During the next steps we will do following:
 ```
 sudo yum install nfs-utils nfs4-acl-tools -y
 ```
-
 3. Mount /var/www/ and target the NFS server’s export for apps
 
 ```
@@ -128,7 +127,7 @@ sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/ww
 ```
 
 
-4. Verify that NFS was mounted successfully by running df -h. Make sure that the changes will persist on Web Server after reboot:
+## 4. Verify that NFS was mounted successfully by running df -h. Make sure that the changes will persist on Web Server after reboot:
 
 ```
 sudo vi /etc/fstab
@@ -140,7 +139,7 @@ sudo vi /etc/fstab
 ```
 
 
-5. Install Remi’s repository, Apache and PHP
+## 5. Install Remi’s repository, Apache and PHP
 
 ```
 sudo yum install httpd -y
@@ -163,9 +162,7 @@ setsebool -P httpd_execmem 1
 ```
 
 
-Repeat steps 1-5 for another 2 Web Servers.
-
-
+## Repeat steps 1-5 for another 2 Web Servers.
 
 
 6. Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. 
